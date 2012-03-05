@@ -1,0 +1,35 @@
+= render 'admin/minutes/upload_script'
+.outset
+  %table.index
+    %thead
+      %tr
+        %th= t('minutes_page')
+        %th= t('slug')
+        %th= t('filter')
+        %th= t('modify')
+    %tbody
+      - unless models.blank?
+        - models.each do |minutes|
+          %tr
+            %td.name
+              = link_to minutes_format_date(minutes.published_at), edit_admin_minute_path(minutes)
+            %td.slug
+              = minutes.slug
+            %td.filter= minutes.part('body').filter.filter_name
+            %td.actions= link_to(image('minus') + ' ' + t('remove'), admin_minute_url(minutes), :class => "action", :method => :delete, :confirm => "Is it OK to delete the meeting minutes for #{minutes.published_at}?")
+      - else
+        %tr
+          %td.empty{:colspan => 4}= t('no_minutes')
+
+#actions
+  = pagination_for(models)
+  %ul
+    %li= link_to image('plus') + " " + t("new_minutes"), new_admin_minute_path, :class => 'action_button'
+    %li
+      = link_to image('upload') + ' ' + t("upload"), '#uploader', :class => 'replace action_button'
+      #uploader.action_button
+        - form_for :upload, :url => upload_admin_minutes_path, :html => { :class => 'button_form', :multipart => true } do |f|
+          %span
+            = f.label :upload, image('upload') + ' ' + t('upload')
+            = f.file_field :upload 
+            = f.submit  t('create_minutes')
