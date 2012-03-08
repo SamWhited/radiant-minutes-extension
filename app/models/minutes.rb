@@ -4,7 +4,6 @@ module Minutes
   module Instance
     def self.included(base)
       base.class_eval {
-        before_validation :set_slug
         before_validation :set_title
         before_validation :set_breadcrumb
         before_validation :set_published
@@ -43,9 +42,9 @@ module Minutes
       true
     end
 
-    # Ignore minutes in radius tags
+    # We want to be able to iterate over minutes
     def virtual?
-      true
+      false
     end
   
     def find_by_path(path, live = true, clean = true)
@@ -91,12 +90,6 @@ module Minutes
 
     def clean_path(path)
       "/#{ path.to_s.strip }".gsub(%r{//+}, '/')
-    end
-
-    def set_slug
-      # If the slug is already set, keep it
-      # otherwise use a Unix timestamp.
-      self.slug = self.slug || Time.now.to_i.to_s
     end
 
     def set_title
