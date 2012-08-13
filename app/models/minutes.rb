@@ -34,7 +34,19 @@ module Minutes
           @minutes.save!
           @minutes
         end
-        
+
+        def date_slug
+          islug = self.slug.to_i
+          raise ArgumentError if islug == 0
+          I18n.localize(Time.at(islug).to_date, :format =>:long)
+        rescue ArgumentError
+          self.slug
+        end
+        def date_slug=(date_str)
+          self.slug = Time.parse(date_str).to_i.to_s
+        rescue ArgumentError
+          self.slug = date_str
+        end
       }
     end
 
