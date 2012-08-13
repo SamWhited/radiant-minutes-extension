@@ -17,7 +17,7 @@ class MinutesExtension < Radiant::Extension
     MenuRenderer.exclude 'MinutesPage'
 
     tab 'Content' do
-      add_item "Meeting Minutes", "/admin/minutes", :after => "Pages"
+      add_item "Meeting Minutes", "/admin/minutes", :after => "Pages", :visibility => [:developer, :admin]
     end
 
     ApplicationHelper.module_eval do
