@@ -1,6 +1,7 @@
-require File.dirname(__FILE__) + '/../../../spec_helper'
+require File.expand_path("../../../spec_helper", __FILE__)
 
 describe Admin::MinutesController do
+  dataset :users, :home_page, :minutes
 
   #Delete these examples and add some real ones
   it "should use Admin::MinutesController" do
