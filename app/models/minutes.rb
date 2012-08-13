@@ -97,6 +97,10 @@ module Minutes
     def child_path(child)
       clean_path(path + '/' + child.slug + child.cache_marker)
     end
+
+    def cache_marker
+      Radiant::Config['minutes.use_cache_param?'] ? "?#{digest}" : ''
+    end
     
     private
 
