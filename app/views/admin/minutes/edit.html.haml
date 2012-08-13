@@ -1,8 +1,8 @@
 %h1= model.new_record? ? t('new_minutes') : t('edit_minutes')
 - form_for [:admin, model], :url => (model.new_record? ? admin_minute_url() : admin_minute_url(model)) do |f|
   %p.title
-    = label :minutes_page, :published_at, t('meeting_date')
-    = f.text_field :published_at, :class => 'date', :maxlength => 255, :id => "minutes_page_slug"
+    = label :minutes_page, :slug, t('meeting_date')
+    = f.text_field :slug, :class => 'date', :maxlength => 255, :id => "minutes_page_slug"
   - f.fields_for :parts do |p|
     %p.content
       = p.label :content, t('content')
