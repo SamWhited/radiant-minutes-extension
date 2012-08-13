@@ -8,25 +8,10 @@ before_script: ./spec/ci/before_script
 script: ./spec/ci/script
 
 env:
-  - RADIANT_VERSION=0.9.1 DB=mysql
-  - RADIANT_VERSION=0.9.1 DB=postgres
   - RADIANT_VERSION=1.0.0 DB=mysql
   - RADIANT_VERSION=1.0.0 DB=postgres
   - RADIANT_VERSION=master DB=mysql
   - RADIANT_VERSION=master DB=postgres
-
-# older versions of radiant do not run on ruby 1.9.x
-# use matrix exclusions to prevent them running
-matrix:
-  exclude:
-    - rvm: 1.9.2
-      env: RADIANT_VERSION=0.9.1 DB=mysql
-    - rvm: 1.9.2
-      env: RADIANT_VERSION=0.9.1 DB=postgres
-    - rvm: 1.9.3
-      env: RADIANT_VERSION=0.9.1 DB=mysql
-    - rvm: 1.9.3
-      env: RADIANT_VERSION=0.9.1 DB=postgres
 
 notifications:
   recipients:
