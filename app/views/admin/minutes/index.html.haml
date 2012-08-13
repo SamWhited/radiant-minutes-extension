@@ -12,11 +12,11 @@
         - models.each do |minutes|
           %tr
             %td.name
-              = link_to minutes_format_date(minutes.published_at), edit_admin_minute_path(minutes)
+              = link_to minutes.date_slug, edit_admin_minute_path(minutes)
             %td.slug
               = minutes.slug
             %td.filter= minutes.part('body').filter.filter_name
-            %td.actions= link_to(image('minus') + ' ' + t('remove'), admin_minute_url(minutes), :class => "action", :method => :delete, :confirm => "Is it OK to delete the meeting minutes for #{minutes.published_at}?")
+            %td.actions= link_to(image('minus') + ' ' + t('remove'), admin_minute_url(minutes), :class => "action", :method => :delete, :confirm => "Is it OK to delete the meeting minutes for #{minutes.date_slug}?")
       - else
         %tr
           %td.empty{:colspan => 4}= t('no_minutes')
