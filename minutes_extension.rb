@@ -34,7 +34,7 @@ class MinutesExtension < Radiant::Extension
         self.is_a?(Minutes::Instance)
       end
 
-#      include MinutesTags
+      include MinutesTags
     end
     
     Admin::NodeHelper.module_eval do
