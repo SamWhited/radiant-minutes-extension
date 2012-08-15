@@ -1,6 +1,6 @@
 %p.title
   = label :minutes_page, :date_slug, t('meeting_date')
-  = object.text_field :date_slug, :class => 'date', :maxlength => 255, :id => "minutes_page_slug", :value => I18n.localize(Time.zone.now.to_date, :format =>:long)
+  = object.text_field :date_slug, :class => 'date', :maxlength => 255, :id => "minutes_page_slug", :value => (model.new_record? ? I18n.localize(Time.zone.now.to_date, :format =>:long) : model.date_slug)
   #tab_control
     #tabs.tabs
       #tab_toolbar
