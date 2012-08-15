@@ -1,0 +1,15 @@
+%p.title
+  = label :minutes_page, :date_slug, t('meeting_date')
+  = object.text_field :date_slug, :class => 'date', :maxlength => 255, :id => "minutes_page_slug", :value => I18n.localize(Time.zone.now.to_date, :format =>:long)
+  #tab_control
+    #tabs.tabs
+      #tab_toolbar
+        %a.popup{:href=> '#add_part_popup', :title=>t('add_meeting')}
+          = image('add_tab', :alt=>t('add_meeting'), :title=>"")
+    #pages.pages
+      = render :partial => 'page_part', :collection => model.parts
+%p.buttons{:style=>"clear: left"}
+  = save_model_button(model)
+  = save_model_and_continue_editing_button(model)
+  = t('or')
+  = link_to t('cancel'), admin_minutes_url

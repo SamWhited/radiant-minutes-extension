@@ -24,10 +24,6 @@ module Minutes
           s.save
         end
 
-        def self.default_page_parts
-          PagePart.new(:name => 'body')
-        end
-
         def self.create_from_upload!(file)
           @minutes = self.new_with_defaults
           @minutes.upload = file
@@ -82,7 +78,7 @@ module Minutes
         self.errors.add(:upload, 'is an unusable format.')
       else
         self.slug = file.original_filename.to_slug().gsub(/-txt$/,'.txt').gsub(/-md$/,'.md').gsub(/-markdown$/,'.markdown').gsub(/-xml$/,'.xml').gsub(/-asc$/,'.asc')
-        self.part('body').content = file.read
+        self.part('Other').content = file.read
       end
     end
 

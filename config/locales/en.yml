@@ -1,15 +1,18 @@
 ---
 en:
-  minutes: Minutes
+  add_meeting: Add Meeting
   create_minutes: Create Minutes
   edit_minutes: Edit Minutes
-  new_minutes: New Minutes
-  path: Path
-  upload: Upload
-  minutes_page: Minutes
-  notes: Notes
-  slug: Slug
   meeting_date: Meeting Date
+  meeting_type: Meeting Type
+  meetings: Meetings
+  minutes: Minutes
   minutes:
     root_required: "You must publish a homepage before you may create %{model}."
+  minutes_page: Minutes
+  new_minutes: New Minutes
   no_minutes: 'No Meeting Minutes'
+  notes: Notes
+  path: Path
+  slug: Slug
+  upload: Upload
