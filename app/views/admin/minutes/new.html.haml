@@ -1,5 +1,5 @@
-%h1= model.new_record? ? t('new_minutes') : t('edit_minutes')
-- form_for [:admin, model], :url => (model.new_record? ? admin_minutes_url() : admin_minutes_url(model)) do |f|
+%h1= t('new_minutes')
+- form_for [:admin, model], :url => admin_minutes_url do |f|
   = render 'fields', :object => f
 
 = render 'popups'
