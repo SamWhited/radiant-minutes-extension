@@ -13,6 +13,13 @@ class MinutesExtension < Radiant::Extension
     # config is the Radiant.configuration object
   end
 
+  cattr_accessor :meeting_types
+
+  @@meeting_types ||= []
+  # Should probably be made more general later (then customized in a `DT
+  # radiant customization' extension)
+  @@meeting_types += ['Club', 'EC', 'PRC', 'Banquet', 'Open House', 'TSC', 'Historian', 'PPM', 'Social', 'Other']
+
   def activate
     MenuRenderer.exclude 'MinutesPage'
 
