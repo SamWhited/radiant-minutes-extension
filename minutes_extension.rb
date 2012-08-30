@@ -68,8 +68,6 @@ class MinutesExtension < Radiant::Extension
       end
       alias_method_chain :set_cache_control, :minutes
     end
-    Admin::PagesController.class_eval {
-      helper Admin::PageNodeAlterationsHelper
-    }
+    
   end
 end
