@@ -7,7 +7,7 @@
         %a.popup{:href=> '#add_part_popup', :title=>t('add_meeting')}
           = image('add_tab', :alt=>t('add_meeting'), :title=>"")
     #pages.pages
-      = render :partial => '/admin/page_parts/page_part', :collection => model.parts
+      = render :partial => '/admin/meeting_parts/page_part', :collection => model.parts
 %p.buttons{:style=>"clear: left"}
   = save_model_button(model)
   = save_model_and_continue_editing_button(model)
