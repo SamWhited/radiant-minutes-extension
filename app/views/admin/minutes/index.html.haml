@@ -4,8 +4,8 @@
     %thead
       %tr
         %th= t('minutes_page')
-        %th= t('slug')
         %th= t('meeting_type')
+        %th= t('status')
         %th= t('modify')
     %tbody
       - unless models.blank?
@@ -13,8 +13,9 @@
           %tr
             %td.name
               = link_to I18n.localize(minutes.published_at.to_date, :format => :long), edit_admin_minutes_instance_path(minutes)
-            %td.slug= minutes.slug
             %td.meeting_type= minutes.title
+            %td.status
+              %span.status{:class => "#{minutes.status.name.downcase}_status"}= t(minutes.status.name.downcase)
             %td.actions= link_to(image('minus') + ' ' + t('remove'), admin_minutes_instance_url(minutes), :class => "action", :method => :delete, :confirm => "Is it OK to delete the #{minutes.title} meeting minutes for #{I18n.localize(minutes.published_at.to_date, :format => :long)}?")
       - else
         %tr
