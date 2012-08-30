@@ -4,11 +4,12 @@ en:
   create_minutes: Create Minutes
   edit_minutes: Edit Minutes
   meeting_date: Meeting Date
+  meeting_id: Meeting ID
   meeting_type: Meeting Type
   meetings: Meetings
   minutes: Minutes
   minutes:
-    root_required: "You must publish a homepage before you may create %{model}."
+    root_required: "You must publish a homepage and %{root} page before you may create %{model}."
   minutes_page: Minutes
   new_minutes: New Minutes
   no_minutes: 'No Meeting Minutes'

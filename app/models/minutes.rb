@@ -1,27 +1,17 @@
 require 'digest/md5'
+require 'securerandom'
 module Minutes
   module InvalidHomePage; end
   module Instance
     def self.included(base)
       base.class_eval {
-        before_validation :set_title
+        before_validation :set_parent
+        before_validation :set_slug
         before_validation :set_breadcrumb
-        before_validation :set_published
         class_inheritable_accessor :minutes_root
-        
-        def self.root
-          Page.find_by_path('/').children.first(:conditions => {:class_name => self.to_s})
-        rescue NoMethodError => e
-          e.extend Minutes::InvalidHomePage
-          raise e
-        end
 
-        def self.create_root
-          s = self.new_with_defaults
-          s.parent_id = Page.find_by_slug('/').id
-          s.created_by_id = ''
-          s.slug = 'minutes'
-          s.save
+        def self.default_page_parts
+          PagePart.new(:name => 'body')
         end
 
         def self.create_from_upload!(file)
@@ -29,19 +19,6 @@ module Minutes
           @minutes.upload = file
           @minutes.save!
           @minutes
-        end
-
-        def date_slug
-          islug = self.slug.to_i
-          raise ArgumentError if islug == 0
-          I18n.localize(Time.at(islug).to_date, :format =>:long)
-        rescue ArgumentError
-          self.slug
-        end
-        def date_slug=(date_str)
-          self.slug = Time.parse(date_str).to_i.to_s
-        rescue ArgumentError
-          self.slug = date_str
         end
       }
     end
@@ -104,17 +81,16 @@ module Minutes
       "/#{ path.to_s.strip }".gsub(%r{//+}, '/')
     end
 
-    def set_title
-      self.title = self.slug
-    end
-  
     def set_breadcrumb
-      self.breadcrumb = self.slug
+      self.breadcrumb = self.title
     end
-    
-    def set_published
-      self.published_at = self.published_at || Time.zone.now
-      self.status_id = Status[:published].id
+
+    def set_slug
+      self.slug = SecureRandom.uuid
+    end
+
+    def set_parent
+      self.parent_id = Page.find_by_path(MinutesExtension.minutes_path).try(:id)
     end
   end
 end

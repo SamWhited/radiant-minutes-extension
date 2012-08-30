@@ -3,7 +3,6 @@ class Admin::MinutesResourceController < Admin::ResourceController
   # only_allow_access_to must be set
   
   prepend_before_filter :find_root
-  prepend_before_filter :create_root, :only => [:new, :upload]
   
   def upload
     if params[:upload].blank?  # necessary params are missing
@@ -20,32 +19,16 @@ class Admin::MinutesResourceController < Admin::ResourceController
   end
   
   def create
-    model.parent_id = @root.id
     model.update_attributes!(params[model_symbol])
     response_for :create
   end
   
   private
   
-  def load_models
-    @root.try(:children) || []
-  end
-  
   def find_root
-    @root = model_class.root
-  rescue Page::MissingRootPageError, Minutes::InvalidHomePage => e
-    flash[:error] = t('minutes.root_required', :model => humanized_model_name)
-    redirect_to welcome_path and return false
-  end
-  
-  def create_root
-    unless @root
-      begin
-        model_class.create_root
-      rescue Page::MissingRootPageError
-        flash[:error] = t('minutes.root_required', :model => humanized_model_name)
-        redirect_to welcome_path and return false
-      end
+    unless Page.find_by_path(MinutesExtension.minutes_path)
+      flash[:error] = t('minutes.root_required', :model => humanized_model_name, :root => MinutesExtension.minutes_path)
+      redirect_to welcome_path and return false
     end
   end
 end

@@ -1,8 +1,4 @@
 %h1= t('new_minutes')
 - form_for [:admin, model], :url => admin_minutes_url do |f|
   = render 'fields', :object => f
-
-= render 'popups'
 = render 'admin/minutes/edit_scripts'
-
-- content_for 'page_scripts', minutes_edit_javascripts

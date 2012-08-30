@@ -13,9 +13,10 @@ class MinutesExtension < Radiant::Extension
     # config is the Radiant.configuration object
   end
 
-  cattr_accessor :meeting_types
+  cattr_accessor :meeting_types, :minutes_path
 
   @@meeting_types ||= ['General', 'Committee', 'Other']
+  @@minutes_path ||= '/minutes/'
 
   def activate
     MenuRenderer.exclude 'MinutesPage'
