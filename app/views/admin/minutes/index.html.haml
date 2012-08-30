@@ -12,11 +12,11 @@
         - models.each do |minutes|
           %tr
             %td.name
-              = link_to minutes.date_slug, edit_admin_minute_path(minutes)
+              = link_to minutes.date_slug, edit_admin_minutes_instance_path(minutes)
             %td.slug
               = minutes.slug
             %td.meetings= minutes.parts.map{ |p| p.name }.join(', ')
-            %td.actions= link_to(image('minus') + ' ' + t('remove'), admin_minute_url(minutes), :class => "action", :method => :delete, :confirm => "Is it OK to delete the meeting minutes for #{minutes.date_slug}?")
+            %td.actions= link_to(image('minus') + ' ' + t('remove'), admin_minutes_instance_url(minutes), :class => "action", :method => :delete, :confirm => "Is it OK to delete the meeting minutes for #{minutes.date_slug}?")
       - else
         %tr
           %td.empty{:colspan => 4}= t('no_minutes')
@@ -24,7 +24,7 @@
 #actions
   = pagination_for(models)
   %ul
-    %li= link_to image('plus') + " " + t("new_minutes"), new_admin_minute_path, :class => 'action_button'
+    %li= link_to image('plus') + " " + t("new_minutes"), new_admin_minutes_instance_path, :class => 'action_button'
     %li
       = link_to image('upload') + ' ' + t("upload"), '#uploader', :class => 'replace action_button'
       #uploader.action_button

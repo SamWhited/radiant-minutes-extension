@@ -1,5 +1,5 @@
 %h1= t('edit_minutes')
-- form_for [:admin, model], :url => admin_minutes_url(model) do |f|
+- form_for [:admin, model], :url => admin_minutes_instance_url(model) do |f|
   = render 'fields', :object => f
 
 = render 'popups'

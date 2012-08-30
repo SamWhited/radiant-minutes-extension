@@ -15,8 +15,7 @@ class MinutesExtension < Radiant::Extension
 
   cattr_accessor :meeting_types
 
-  @@meeting_types ||= []
-  @@meeting_types += ['General', 'Committee', 'Other']
+  @@meeting_types ||= ['General', 'Committee', 'Other']
 
   def activate
     MenuRenderer.exclude 'MinutesPage'

@@ -4,6 +4,6 @@ ActionController::Routing::Routes.draw do |map|
   # end
 
   map.namespace :admin, :collection => { :upload => :post } do |admin|
-    admin.resources :minutes
+    admin.resources :minutes, :singular => :minutes_instance
   end
 end
